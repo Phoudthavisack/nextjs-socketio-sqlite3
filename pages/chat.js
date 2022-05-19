@@ -16,7 +16,7 @@ const key = {
 const socket = io("/socket/admin", key);
 
 // ------------------------ //
-export default function chat() {
+export default function Chat() {
   const [data, setData] = useState([]);
   useEffect(() => {
     if (!socket) return;
