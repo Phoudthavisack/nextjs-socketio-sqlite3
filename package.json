@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node index.js",
     "build": "next build",
-    "start": "vercel dev"
+    "start": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
