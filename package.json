@@ -2,10 +2,12 @@
   "name": "nextjs-socketio-sqlite3",
   "version": "0.1.0",
   "private": true,
+
   "scripts": {
-    "dev": "node index.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node index.js"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
