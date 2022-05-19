@@ -592,6 +592,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@now/node@^1.8.5":
+  "integrity" "sha512-dZ/ZzOLug0ap/jiLVnmwS93PpbNjGR/SkDQjQ+BFRTTi2vUZ768CGUpmgoZy81uxLjZL9xlMIhmTVHwjfxu7WA=="
+  "resolved" "https://registry.npmjs.org/@now/node/-/node-1.8.5.tgz"
+  "version" "1.8.5"
+  dependencies:
+    "@types/node" "*"
+    "ts-node" "8.9.1"
+    "typescript" "3.9.3"
+
 "@npmcli/fs@^1.0.0":
   "integrity" "sha512-8KG5RD0GVP4ydEzRn/I4BNDuxDtqVbOdm8675T49OIG/NGhaK0pjPX7ZcDlvKYbA+ulvVK3ztfcF4uBdOxuJbQ=="
   "resolved" "https://registry.npmjs.org/@npmcli/fs/-/fs-1.1.1.tgz"
@@ -4006,6 +4015,11 @@
   "integrity" "sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.3.4.tgz"
   "version" "4.3.4"
+
+"typescript@3.9.3":
+  "integrity" "sha512-D/wqnB2xzNFIcoBG9FG8cXRDjiqSTbG2wd8DMZeQyJlP1vfTkIxH4GKveWaEBYySKIg+USu+E+EDIR47SqnaMQ=="
+  "resolved" "https://registry.npmjs.org/typescript/-/typescript-3.9.3.tgz"
+  "version" "3.9.3"
 
 "unbox-primitive@^1.0.2":
   "integrity" "sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw=="
