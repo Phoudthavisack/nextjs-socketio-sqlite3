@@ -1,17 +1,20 @@
 const express = require("express");
-const next = require("next");
+const nextjs = require("next");
 const socketio = require("socket.io");
 
-const port = parseInt(process.env.PORT, 10) || 3220;
+const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = nextjs({ dev });
 const handle = app.getRequestHandler();
+// socket
+const chat = require("./socket/chat");
 
+// ---------------------------- //
 app.prepare().then(() => {
   const app = express();
 
-  app.all("*", (req, res) => {
-    return handle(req, res);
+  app.all("*", (req, res, next) => {
+    return handle(req, res, next);
   });
 
   const server = app.listen(port, (err) => {
@@ -20,18 +23,39 @@ app.prepare().then(() => {
   });
 
   // set
-  const io = socketio(server, { cors: { origin: "*" } });
+  const io = socketio(server);
 
-  io.of("/pay").on("connection", (socket) => {
-    socket.on("GET_PAYMENT_CODE", (msg) => {
-      io.emit("GET_PAYMENT_CODE", msg);
-      console.log(msg);
+  io.of("/socket/chat").on("connection", (socket) => {
+    //   socket.join("room1");
+    //   console.log(socket.rooms);
+    socket.on("chat", (msg) => {
+      socket.broadcast.emit("chat", msg);
+      io.of("/socket/admin").emit("chat", msg);
+      // socket.to("room1").emit("chat", msg);
+      // console.log(msg);
+      return true;
     });
   });
-  io.of("/order").on("connection", (socket) => {
-    socket.on("GET_PAYMENT_CODE", (msg) => {
-      io.emit("GET_PAYMENT_CODE", msg);
-      console.log(msg);
+
+  // admin
+  const isValidJwt = (header) => {
+    if (typeof header === "undefined") return false;
+    const token = header.split(" ")[1];
+    if (token === "abc") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  io.of("/socket/admin").on("connection", (socket) => {
+    const header = socket.handshake.headers["authorization"];
+    if (!isValidJwt(header)) return socket.disconnect(true);
+    // socket.join("room1");
+    // console.log(socket.rooms);
+    socket.on("chat", (msg) => {
+      io.of("/socket/chat").emit("chat", msg);
+      return true;
     });
+    io.of("/socket/chat").emit("chat", "admin connect");
   });
 });
